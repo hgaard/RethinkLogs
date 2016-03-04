@@ -1,0 +1,54 @@
+﻿body {
+    font-family: "Open Sans", sans-serif;
+    background: #F9FCFC;
+    margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #647276;
+    font-family: "freight-sans-pro", "FreightSans";
+    line-height: 1.25;
+    margin: 0;
+    text-rendering: optimizeLegibility;
+}
+
+.message {
+    margin: 10px;
+    color: #385A65;
+}
+
+.sender {
+    font-weight: bold;
+}
+
+.sender, .text {
+    display: inline-block;
+}
+
+.entry {
+    margin: 15px;
+}
+
+.date {
+    font-weight: bold;
+}
+
+.id {
+    float: right;
+}
+.level {
+    width: 110px;
+    color: yellowgreen;
+}
+.message-detail {
+  border: 2px dashed #666;
+  margin: 20px;
+  padding: 10px;
+  font-family: "Arial";
+}
+#jsonStr, #regeStr {
+  border: 2px dashed #666;
+  margin: 20px;
+  padding: 10px;
+  font-family: "Arial";
+}
