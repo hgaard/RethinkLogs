@@ -7,8 +7,8 @@
     <ProjectGuid>{4CD0C261-8741-4CAF-987C-6D5FC1AAABA4}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RethinkLogs.LogProucer</RootNamespace>
-    <AssemblyName>RethinkLogs.LogProucer</AssemblyName>
+    <RootNamespace>RethinkLogs.LogProducer</RootNamespace>
+    <AssemblyName>RethinkLogs.LogProducer</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -45,20 +45,8 @@
       <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="protobuf-net, Version=2.0.0.666, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
-      <HintPath>..\packages\protobuf-net.2.0.0.666\lib\net40\protobuf-net.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="RethinkDb, Version=0.10.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\rethinkdb-net.0.10.0.0\lib\net45\RethinkDb.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="RethinkDb.Driver, Version=2.2.7.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\RethinkDb.Driver.2.2.7\lib\net45\RethinkDb.Driver.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="RethinkDb.Newtonsoft, Version=0.10.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\rethinkdb-net-newtonsoft.0.10.0.0\lib\net45\RethinkDb.Newtonsoft.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Serilog, Version=1.5.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
@@ -87,8 +75,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Serilog.Sinks.RethinkDB\Serilog.Sinks.RethinkDB.csproj">
-      <Project>{416ccf2f-e467-4d35-a217-17a18891cea1}</Project>
+    <ProjectReference Include="..\..\lib\serilog-sinks-rethikdb\src\Serilog.Sinks.RethinkDB\Serilog.Sinks.RethinkDB.csproj">
+      <Project>{8164bde4-48fe-4a81-b33e-fee348904bb8}</Project>
       <Name>Serilog.Sinks.RethinkDB</Name>
     </ProjectReference>
   </ItemGroup>

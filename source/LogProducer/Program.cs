@@ -2,7 +2,7 @@
 using RethinkDb.Driver;
 using Serilog;
 
-namespace RethinkLogs.LogProucer
+namespace RethinkLogs.LogProducer
 {
     class Program
     {
@@ -11,7 +11,7 @@ namespace RethinkLogs.LogProucer
         {
 
             var log = new LoggerConfiguration()
-                 .WriteTo.RethinkDb()
+                 .WriteTo.RethinkDB()
                 .CreateLogger();
 
             log.Information("Hi there - starting awesome app");

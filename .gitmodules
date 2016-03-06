@@ -1,0 +1,3 @@
+[submodule "lib/serilog-sinks-rethikdb"]
+	path = lib/serilog-sinks-rethikdb
+	url = https://github.com/hgaard/serilog-sinks-rethinkdb.git
