@@ -132,6 +132,7 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="LogEvent.cs" />
+    <Compile Include="LogEventLevel.cs" />
     <Compile Include="LogHub.cs" />
     <Compile Include="LogUpdateHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

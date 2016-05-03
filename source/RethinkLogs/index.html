@@ -52,9 +52,7 @@
             },
             methods: {
                 onMessage: function (id, Message, Timestamp, Level) {
-                    this.messages.reverse(); // Ugly hack to put new events on top of listw
-                    this.messages.push({ id: id, Message: Message, Timestamp: moment(Timestamp).format(), Level: app.toText(Level) });
-                    this.messages.reverse();
+                    this.messages.unshift({ id: id, Message: Message, Timestamp: moment(Timestamp).format(), Level: app.toText(Level) });
                 },
                 sendQuery: function () {
                     logger.server.query($('#queryString').val()).then(function (messages) {
