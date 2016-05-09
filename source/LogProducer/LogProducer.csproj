@@ -45,8 +45,8 @@
       <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="RethinkDb.Driver, Version=2.2.7.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\RethinkDb.Driver.2.2.7\lib\net45\RethinkDb.Driver.dll</HintPath>
+    <Reference Include="RethinkDb.Driver, Version=2.2.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RethinkDb.Driver.2.2.9\lib\net45\RethinkDb.Driver.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Serilog, Version=1.5.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
@@ -55,6 +55,10 @@
     </Reference>
     <Reference Include="Serilog.FullNetFx, Version=1.5.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <HintPath>..\packages\Serilog.1.5.14\lib\net45\Serilog.FullNetFx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Serilog.Sinks.RethinkDB, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hgaard.Serilog.Sinks.RethinkDB.2.0.0\lib\net45\Serilog.Sinks.RethinkDB.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -73,12 +77,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\lib\serilog-sinks-rethikdb\src\Serilog.Sinks.RethinkDB\Serilog.Sinks.RethinkDB.csproj">
-      <Project>{8164bde4-48fe-4a81-b33e-fee348904bb8}</Project>
-      <Name>Serilog.Sinks.RethinkDB</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
