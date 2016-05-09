@@ -43,7 +43,7 @@
             },
             created: function () {
                 $.connection.hub.start().then(function () {
-                    logger.server.history(10).then(function (messages) {
+                    logger.server.history(100).then(function (messages) {
                         messages.forEach(function (obj) {
                             app.onMessage(obj.id, obj.Message, obj.Timestamp, obj.Level);
                         });

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNet.SignalR;
 using Newtonsoft.Json.Linq;
 using RethinkDb.Driver;
@@ -16,41 +17,38 @@ namespace RethinkLogs
             _connection = R.Connection().Connect();
         }
 
-        public JArray History(int limit)
+        public IList<LogEvent> History(int limit)
         {
             var output = R.Db(Constants.LoggingDatabase).Table(Constants.LoggingTable)
                 .OrderBy(R.Desc("Timestamp"))
                 .Limit(limit)
                 .OrderBy("Timestamp")
-                .RunResult<JArray>(_connection);
+                .RunResult<IList<LogEvent>>(_connection);
 
             return output;
         }
 
-        public JArray Query(string queryString)
+        public IList<LogEvent> Query(string queryString)
         {
-            var result = new JArray();
             try
             {
-                result = R.Db(Constants.LoggingDatabase).Table(Constants.LoggingTable)
+                return R.Db(Constants.LoggingDatabase).Table(Constants.LoggingTable)
                    .Filter(r => r["Message"].Match("(?i)" + queryString))
                    .OrderBy(R.Desc("Timestamp"))
-                   .RunResult<JArray>(_connection);
+                   .RunResult<IList<LogEvent>>(_connection);
             }
             catch (Exception)
             {
                 // ignore
             }
-            return result;
+            return null;
         }
 
-        public JObject Get(string id)
+        public LogEvent Get(string id)
         {
-            var result =
+            return
                 R.Db(Constants.LoggingDatabase).Table(Constants.LoggingTable)
-                .Get(id).RunResult<JObject>(_connection);
-
-            return result;
+                .Get(id).RunResult<LogEvent>(_connection);
         }
     }
 }
