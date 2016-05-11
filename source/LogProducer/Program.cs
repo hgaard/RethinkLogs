@@ -1,6 +1,7 @@
 ﻿using System;
 using RethinkDb.Driver;
 using Serilog;
+using Serilog.Core;
 
 namespace RethinkLogs.LogProducer
 {
@@ -12,6 +13,9 @@ namespace RethinkLogs.LogProducer
 
             var log = new LoggerConfiguration()
                  .WriteTo.RethinkDB()
+                 .Enrich.WithProperty("Application", "Producer")
+                 .Enrich.WithThreadId()
+                 .Enrich.WithEnvironmentUserName()
                 .CreateLogger();
 
             log.Information("Hi there - starting awesome app");
@@ -21,11 +25,29 @@ namespace RethinkLogs.LogProducer
                 var input = Console.ReadLine();
                 if (input == ":q")
                     goOn = false;
-                
-                log.Information(input);
+
+                var level = input.Substring(0, input.IndexOf(" "));
+                var message = input.Substring(input.IndexOf(" ") + 1);
+                LogMessage(level, message, log);
             }
 
             log.Information("exiting - bummer..");
+        }
+
+        private static void LogMessage(string level, string message, ILogger log)
+        {
+            if (level.ToUpperInvariant().StartsWith("FA"))
+                log.Fatal(new ArgumentException(message), message, Environment.OSVersion);
+            else if(level.ToUpperInvariant().StartsWith("ER"))
+                log.Error(message, Environment.CommandLine);
+            else if (level.ToUpperInvariant().StartsWith("WA"))
+                log.Warning(message);
+            else if(level.ToUpperInvariant().StartsWith("IN"))
+                log.Information(message);
+            else
+            {
+                log.Verbose(message);
+            }
         }
     }
 }

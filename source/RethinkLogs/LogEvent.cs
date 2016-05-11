@@ -18,7 +18,7 @@ namespace RethinkLogs
         
             public string MessageTemplate;
         
-            public Dictionary<string, object> Properties;
+            public Dictionary<string, object> Props;
 
             public string Exception;
         

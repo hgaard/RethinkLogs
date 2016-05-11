@@ -14,13 +14,13 @@
     </div>
     <div v-if="message" class="message-detail">
         <div class=text></div>
-            <div class="text">{{message}}</div>
+        <div class="text">{{message}}</div>
     </div>
     <div id="logs">
         <div id="messages">
             <div class="message" v-for="message in messages">
                 <div class="text date">{{message.Timestamp}} - </div>
-                <div v-on:click="getItem" class="text level">{{message.Level}} - </div>
+                <div v-bind v-on:click="getItem" class="text level">{{message.Level}} - </div>
                 <div class="text">{{message.Message}}</div>
                 <button class="id" v-on:click="getItem(message.id)">Get</button>
             </div>
@@ -42,54 +42,39 @@
                 message: null
             },
             created: function () {
-                $.connection.hub.start().then(function () {
-                    logger.server.history(100).then(function (messages) {
-                        messages.forEach(function (obj) {
-                            app.onMessage(obj.id, obj.Message, obj.Timestamp, obj.Level);
-                        });
+                $.connection.hub.start()
+                    .then(function () {
+                        logger.server.history(100)
+                            .then(function (messages) {
+                                messages.forEach(function (obj) {
+                                    app.onMessage(obj.id, obj.Message, obj.Timestamp, obj.Level);
+                                });
+                            });
                     });
-                });
             },
             methods: {
                 onMessage: function (id, Message, Timestamp, Level) {
-                    this.messages.unshift({ id: id, Message: Message, Timestamp: moment(Timestamp).format(), Level: app.toText(Level) });
-                },
-                sendQuery: function () {
-                    logger.server.query($('#queryString').val()).then(function (messages) {
-                        app.messages = [];
-                        messages.forEach(function (msg) {
-                            app.onMessage(msg.id, msg.Message, msg.Timestamp, msg.Level);
-                        });
+                    this.messages.unshift({
+                        id: id,
+                        Message: Message,
+                        Timestamp: moment(Timestamp).format(),
+                        Level: app.toText(Level)
                     });
                 },
+                sendQuery: function () {
+                    logger.server.query($('#queryString').val())
+                        .then(function (messages) {
+                            app.messages = [];
+                            messages.forEach(function (msg) {
+                                app.onMessage(msg.id, msg.Message, msg.Timestamp, msg.Level);
+                            });
+                        });
+                },
                 getItem: function (msg) {
-                   logger.server.get(msg).then( function(message) {
-   
-                       // Not working as expected
-                       // Found here http://jsfiddle.net/f24UP/2/
-                       // var f = {
-                       //     brace: 0
-                       // }; // for tracking matches, in particular the curly braces
-
-                       //var jsonStr = JSON.stringify(message);
-                       //var regeStr = jsonStr.replace(/({|}[,]*|[^{}:]+:[^{}:,]*[,{]*)/g, function (m, p1) {
-                       //    var rtnFn = function () {
-                       //        return '<div style="text-indent: ' + (f['brace'] * 20) + 'px;">' + p1 + '</div>';
-                       //    },
-                       //        rtnStr = 0;
-                       //    if (p1.lastIndexOf('{') === (p1.length - 1)) {
-                       //        rtnStr = rtnFn();
-                       //        f['brace'] += 1;
-                       //    } else if (p1.indexOf('}') === 0) {
-                       //        f['brace'] -= 1;
-                       //        rtnStr = rtnFn();
-                       //    } else {
-                       //        rtnStr = rtnFn();
-                       //    }
-                       //    return rtnStr;
-                        //});
-                       app.message = JSON.stringify(message);
-                   });
+                    logger.server.get(msg)
+                        .then(function (message) {
+                            app.message = JSON.stringify(message);
+                        });
                 },
                 toText: function (level) {
                     switch (level) {
