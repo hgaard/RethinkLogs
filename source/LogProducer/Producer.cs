@@ -1,25 +1,32 @@
 ﻿using System;
+using System.Runtime.Remoting.Channels;
 using Serilog;
 
 namespace RethinkLogs.LogProducer
 {
     public class Producer
     {
-        public static void LogMessage(string level, string message, ILogger log)
+        public static void LogMessage(int level, string message, ILogger log)
         {
-
-            if (level.ToUpperInvariant().StartsWith("FA"))
-                log.Fatal(new ArgumentException(message), message, Environment.OSVersion);
-            else if (level.ToUpperInvariant().StartsWith("ER"))
-                log.Error(message, Environment.CommandLine);
-            else if (level.ToUpperInvariant().StartsWith("WA"))
-                log.Warning(message);
-            else if (level.ToUpperInvariant().StartsWith("IN"))
-                log.Information(message);
-            else
+            switch (level)
             {
-                log.Verbose(message);
-            }
+                case 5:
+                    log.Fatal(new ArgumentException(message), message, Environment.OSVersion);
+                    break;
+                case 4:
+                    log.Error(message, Environment.CommandLine);
+                    break;
+                case 3:
+                    log.Warning(message);
+                    break;
+                case 2:
+                    log.Information(message);
+                    break;
+                default:
+                    log.Verbose(message);
+                    break;
+
+            }   
         }
     }
 }

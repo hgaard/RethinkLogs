@@ -1,5 +1,6 @@
 ﻿using System;
 using RethinkDb.Driver;
+using RethinkDb.Driver.Ast;
 using Serilog;
 using Serilog.Core;
 
@@ -30,7 +31,7 @@ namespace RethinkLogs.LogProducer
                 if (input.ToUpperInvariant().StartsWith("BLABBER"))
                     Blabbermouth.Start(log);
 
-                var level = input.Substring(0, input.IndexOf(" "));
+                var level = GetLevel(input);
                 var message = input.Substring(input.IndexOf(" ") + 1);
                 Producer.LogMessage(level, message, log);
             }
@@ -38,6 +39,24 @@ namespace RethinkLogs.LogProducer
             log.Information("exiting - bummer..");
         }
 
-       
+        private static int GetLevel(string input)
+        {
+            var level = input.Substring(0, input.IndexOf(" "));
+            if (level.ToUpperInvariant().StartsWith("FA"))
+                return 5;
+
+            if (level.ToUpperInvariant().StartsWith("ER"))
+                return 4;
+
+            if (level.ToUpperInvariant().StartsWith("WA"))
+                return 3;
+
+            if (level.ToUpperInvariant().StartsWith("IN"))
+                return 2;
+
+            
+            return 1;
+            
+        }
     }
 }

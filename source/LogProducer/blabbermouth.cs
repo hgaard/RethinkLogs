@@ -12,7 +12,7 @@ namespace RethinkLogs.LogProducer
             while (true)
             {
                 //Gossip.Tell().Important().Gossip.ToProducer();
-                Producer.LogMessage("WAR", Gossip.Tell(), logger);
+                Producer.LogMessage(Gossip.HowImportant(), Gossip.Tell(), logger);
 
                 Thread.Sleep(Gossip.Wait());
             }

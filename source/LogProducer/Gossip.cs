@@ -22,6 +22,11 @@ namespace RethinkLogs.LogProducer
         });
         private static Random _rnd = new Random(DateTime.Now.Millisecond);
 
+        public static int HowImportant()
+        {
+            return _rnd.Next(0, 5);
+        }
+
         public static string Tell()
         {
             return _importantMessages[_rnd.Next(_importantMessages.Count - 1)];
