@@ -27,28 +27,17 @@ namespace RethinkLogs.LogProducer
                 if (input == ":q")
                     goOn = false;
 
+                if (input.ToUpperInvariant().StartsWith("BLABBER"))
+                    Blabbermouth.Start(log);
+
                 var level = input.Substring(0, input.IndexOf(" "));
                 var message = input.Substring(input.IndexOf(" ") + 1);
-                LogMessage(level, message, log);
+                Producer.LogMessage(level, message, log);
             }
 
             log.Information("exiting - bummer..");
         }
 
-        private static void LogMessage(string level, string message, ILogger log)
-        {
-            if (level.ToUpperInvariant().StartsWith("FA"))
-                log.Fatal(new ArgumentException(message), message, Environment.OSVersion);
-            else if (level.ToUpperInvariant().StartsWith("ER"))
-                log.Error(message, Environment.CommandLine);
-            else if (level.ToUpperInvariant().StartsWith("WA"))
-                log.Warning(message);
-            else if (level.ToUpperInvariant().StartsWith("IN"))
-                log.Information(message);
-            else
-            {
-                log.Verbose(message);
-            }
-        }
+       
     }
 }
