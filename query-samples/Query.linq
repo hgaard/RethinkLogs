@@ -28,7 +28,3 @@ R.Db(db).Table(table).Filter(r=> r["Props"]["ThreadId"] == 8).RunResult<IList<Lo
 
 // Pluck props
 R.Db(db).Table(table).Pluck("Props").RunResult<IList<JObject>>(connection).Dump();
-
-
-        
-    

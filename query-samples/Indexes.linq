@@ -1,18 +1,19 @@
 <Query Kind="Statements">
+  <Reference Relative="..\source\RethinkLogs\bin\RethinkLogs.dll">C:\Users\jakob\Code\hgaard\RethinkLogs\source\RethinkLogs\bin\RethinkLogs.dll</Reference>
   <NuGetReference>RethinkDb.Driver</NuGetReference>
-  <Namespace>RethinkDb.Driver</Namespace>
   <Namespace>Newtonsoft.Json.Linq</Namespace>
+  <Namespace>RethinkDb.Driver</Namespace>
+  <Namespace>RethinkLogs</Namespace>
 </Query>
 
-var db = "music";
-var table = "products";
+var db = "logging";
+var table = "log";
 var R = RethinkDB.R;
 var connection = R.Connection().Connect();
 
 // Create Index on 
-R.Table(table).IndexDrop("Artist").Run(connection);
-R.Table(table).IndexCreate("Artist").Run(connection);
+R.Db(db).Table(table).IndexDrop("Level").Run(connection);
+R.Db(db).Table(table).IndexCreate("Level").Run(connection);
 
 // Query index
-var rs = R.Table(table).GetAll("Muse")[new { index = "Artist" }].Run(connection);
-((IEnumerable)rs).Cast<dynamic>().ForEach(x => Console.Write(x.ToString()));
+var rs = R.Db(db).Table(table).GetAll(3)[new { index = "Level" }].RunResult<IList<LogEvent>>(connection).Dump();
