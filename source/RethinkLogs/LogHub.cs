@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNet.SignalR;
 using Newtonsoft.Json.Linq;
 using RethinkDb.Driver;
@@ -15,6 +16,23 @@ namespace RethinkLogs
         internal static void Init()
         {
             _connection = R.Connection().Connect();
+        }
+
+        public static void HandleUpdates()
+        {
+
+            var hub = GlobalHost.ConnectionManager.GetHubContext<LogHub>();
+            var connection = R.Connection().Connect();
+            var feed = R.Db(Constants.LoggingDatabase)
+                        .Table(Constants.LoggingTable)
+                        .Changes()
+                        .RunChanges<LogEvent>(connection);
+
+
+            feed.Select(x => hub.Clients.All.onMessage(x.NewValue.Id,
+                x.NewValue.Message,
+                x.NewValue.Timestamp,
+                x.NewValue.Level)).ToList();
         }
 
         public IList<LogEvent> History(int limit)

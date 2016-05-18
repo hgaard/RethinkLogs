@@ -1,8 +1,6 @@
 ﻿using System;
 using RethinkDb.Driver;
-using RethinkDb.Driver.Ast;
 using Serilog;
-using Serilog.Core;
 
 namespace RethinkLogs.LogProducer
 {
@@ -21,14 +19,14 @@ namespace RethinkLogs.LogProducer
                 .CreateLogger();
 
             log.Information("Hi there - starting awesome app");
-            var goOn = true;
-            while (goOn)
+
+            while (true)
             {
                 var input = Console.ReadLine();
                 if (input == ":q")
-                    goOn = false;
+                    break;
 
-                if (input.ToUpperInvariant().StartsWith("BLABBER"))
+                if (input.ToUpperInvariant().StartsWith("BLA"))
                     Blabbermouth.Start(log);
 
                 var level = GetLevel(input);
@@ -42,6 +40,9 @@ namespace RethinkLogs.LogProducer
         private static int GetLevel(string input)
         {
             var level = input.Substring(0, input.IndexOf(" "));
+            if (string.IsNullOrEmpty(level))
+                return 1;
+
             if (level.ToUpperInvariant().StartsWith("FA"))
                 return 5;
 

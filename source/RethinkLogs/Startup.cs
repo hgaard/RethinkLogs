@@ -1,9 +1,6 @@
 ﻿using System.Threading.Tasks;
-using Microsoft.Owin;
 using Owin;
-using RethinkLogs;
 
-[assembly: OwinStartup(typeof(Startup))]
 
 namespace RethinkLogs
 {
@@ -14,7 +11,7 @@ namespace RethinkLogs
             LogHub.Init();
 
             Task.Factory.StartNew(
-                LogUpdateHandler.HandleUpdates,
+                LogHub.HandleUpdates,
                 TaskCreationOptions.LongRunning);
 
             app.MapSignalR();

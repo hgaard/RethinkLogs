@@ -6,7 +6,6 @@
     <link rel="stylesheet" media="screen" href="content/site.css" />
 </head>
 <body>
-
     <h1 class="logo">RethinkLogs</h1>
     <div class="query">
         <input id="queryString" class="text" placeholder="enter query" />
@@ -19,19 +18,19 @@
     <div id="logs">
         <div id="messages">
             <div class="message" v-for="message in messages">
-                <div class="text date">{{message.Timestamp}} - </div>
-                <div v-bind v-on:click="getItem" class="text level">{{message.Level}} - </div>
-                <div class="text">{{message.Message}}</div>
-                <button class="id" v-on:click="getItem(message.id)">Get</button>
+                <a v-on:click="getItem(message.id)">
+                    <div class="text date">{{message.Timestamp}} - </div>
+                    <div v-bind:class="message.Level" class="text">{{message.Level}}</div>
+                    <div class="text"> - </div>
+                    <div class="text">{{message.Message}}</div>
+                </a>
             </div>
         </div>
     </div>
-
     <script src="Scripts/jquery-1.6.4.min.js"></script>
     <script src="Scripts/jquery.signalR-2.2.0.min.js"></script>
     <script src="signalr/hubs"></script>
     <script src="Scripts/moment.min.js"></script>
-
     <script type="text/javascript">
         var logger = $.connection.logHub;
 
