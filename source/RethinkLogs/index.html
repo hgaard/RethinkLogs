@@ -45,27 +45,27 @@
                     .then(function () {
                         logger.server.history(100)
                             .then(function (messages) {
-                                messages.forEach(function (obj) {
-                                    app.onMessage(obj.id, obj.Message, obj.Timestamp, obj.Level);
+                                messages.forEach(function (logEvent) {
+                                    app.onMessage(logEvent);
                                 });
                             });
                     });
             },
             methods: {
-                onMessage: function (id, Message, Timestamp, Level) {
+                onMessage: function (logEvent) {
                     this.messages.unshift({
-                        id: id,
-                        Message: Message,
-                        Timestamp: moment(Timestamp).format(),
-                        Level: app.toText(Level)
+                        id: logEvent.id,
+                        Message: logEvent.Message,
+                        Timestamp: moment(logEvent.Timestamp).format(),
+                        Level: app.toText(logEvent.Level)
                     });
                 },
                 sendQuery: function () {
                     logger.server.query($('#queryString').val())
                         .then(function (messages) {
                             app.messages = [];
-                            messages.forEach(function (msg) {
-                                app.onMessage(msg.id, msg.Message, msg.Timestamp, msg.Level);
+                            messages.forEach(function (logEvent) {
+                                app.onMessage(logEvent);
                             });
                         });
                 },

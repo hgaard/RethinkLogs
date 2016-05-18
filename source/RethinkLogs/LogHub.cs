@@ -29,10 +29,7 @@ namespace RethinkLogs
                         .RunChanges<LogEvent>(connection);
 
 
-            feed.Select(x => hub.Clients.All.onMessage(x.NewValue.Id,
-                x.NewValue.Message,
-                x.NewValue.Timestamp,
-                x.NewValue.Level)).ToList();
+            feed.Select(x => hub.Clients.All.onMessage(x.NewValue)).ToList();
         }
 
         public IList<LogEvent> History(int limit)
