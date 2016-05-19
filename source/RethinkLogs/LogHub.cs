@@ -48,7 +48,7 @@ namespace RethinkLogs
             try
             {
                 return R.Db(Constants.LoggingDatabase).Table(Constants.LoggingTable)
-                   .Filter(r => r["Message"].Match("(?i)" + queryString))
+                   .Filter(r => r["Message"].Match(queryString))
                    .OrderBy(R.Desc("Timestamp"))
                    .RunResult<IList<LogEvent>>(_connection);
             }

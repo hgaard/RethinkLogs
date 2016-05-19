@@ -22,6 +22,7 @@ namespace RethinkLogs.LogProducer
 
             while (true)
             {
+                Console.Write("Logconsole>");
                 var input = Console.ReadLine();
                 if (input == ":q")
                     break;

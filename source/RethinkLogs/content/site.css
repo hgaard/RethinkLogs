@@ -1,17 +1,31 @@
 ﻿body {
-    font-family: "Open Sans", sans-serif;
+    
     background: #F9FCFC;
     margin: 0;
+    font-family: Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    color: #647276;
-    font-family: "freight-sans-pro", "FreightSans";
     line-height: 1.25;
     margin: 0;
     text-rendering: optimizeLegibility;
 }
 
+.header {
+    background-color: #214753;
+    height: 7vh
+}
+
+.logo {
+    font-family: "freight-sans-pro", "FreightSans";
+    font-size: 40px;
+    color: #d0dbde;
+}
+
+.query {
+    margin-top: 10px;
+    margin-left: 10px;
+}
 .message {
     margin: 10px;
     color: #385A65;
@@ -36,35 +50,42 @@ h1, h2, h3, h4, h5, h6 {
 .id {
     float: right;
 }
+
 .Verbose {
     width: 110px;
-    color: lightgreen;
+    color: blueviolet;
 }
+
 .Information {
     width: 110px;
     color: green;
 }
+
 .Warning {
     width: 110px;
-    color: yellow;
+    color: orange;
 }
+
 .Error {
     width: 110px;
     color: lightcoral;
 }
+
 .Fatal {
     width: 110px;
     color: red;
 }
+
 .message-detail {
-  border: 2px dashed #666;
-  margin: 20px;
-  padding: 10px;
-  font-family: "Arial";
+    border: 2px dashed #666;
+    margin: 20px;
+    padding: 10px;
+    font-family: "Arial";
 }
+
 #jsonStr, #regeStr {
-  border: 2px dashed #666;
-  margin: 20px;
-  padding: 10px;
-  font-family: "Arial";
+    border: 2px dashed #666;
+    margin: 20px;
+    padding: 10px;
+    font-family: "Arial";
 }

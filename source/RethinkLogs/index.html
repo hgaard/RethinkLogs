@@ -6,7 +6,9 @@
     <link rel="stylesheet" media="screen" href="content/site.css" />
 </head>
 <body>
-    <h1 class="logo">RethinkLogs</h1>
+<div class="header">   
+    <div class="logo">RethinkLogs</div>
+</div>
     <div class="query">
         <input id="queryString" class="text" placeholder="enter query" />
         <button v-on:click="sendQuery">Query</button>
@@ -27,10 +29,10 @@
             </div>
         </div>
     </div>
-    <script src="Scripts/jquery-1.6.4.min.js"></script>
-    <script src="Scripts/jquery.signalR-2.2.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/signalr.js/2.2.0/jquery.signalR.min.js"></script>
     <script src="signalr/hubs"></script>
-    <script src="Scripts/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.js"></script>
     <script type="text/javascript">
         var logger = $.connection.logHub;
 
