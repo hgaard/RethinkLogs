@@ -239,3 +239,10 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+
+#Mac
+.DS_Store
+
+#Rider
+.idea
+*.sln.iml
